@@ -1,0 +1,37 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - dev
+      - qa
+      - prod
+  workflow_dispatch:  # allows manual trigger from Actions tab
+
+jobs:
+  deploy-dev:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Deploy to Development
+        run: echo "Deploying to Development Environment"
+
+  deploy-qa:
+    if: github.ref == 'refs/heads/qa'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Deploy to QA
+        run: echo "Deploying to QA Environment"
+
+  deploy-prod:
+    if: github.ref == 'refs/heads/prod'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Deploy to Production
+        run: echo "Deploying to Production Environment"
